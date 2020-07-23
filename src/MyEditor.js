@@ -4,7 +4,7 @@ import { Editor, EditorState, RichUtils } from "draft-js";
 class MyEditor extends React.Component {
   editorStyles = {
     width: "90%",
-    height: "50%",
+    height: "400px",
     margin: "10px",
     border: "1px solid red",
   };
@@ -28,13 +28,24 @@ class MyEditor extends React.Component {
 
   render() {
     return (
-      <div style={this.editorStyles}>
-        <Editor
-          editorState={this.state.editorState}
-          onChange={this.onChange}
-          handleKeyCommand={this.handleKeyCommand.bind(this)}
-        />
-      </div>
+      <>
+        <div style={{ margin: "10px" }}>
+          <button onClick={() => this.handleKeyCommand("bold")}>Bold</button>
+          <button onClick={() => this.handleKeyCommand("italic")}>
+            Italic
+          </button>
+          <button onClick={() => this.handleKeyCommand("underline")}>
+            Underline
+          </button>
+        </div>
+        <div style={this.editorStyles}>
+          <Editor
+            editorState={this.state.editorState}
+            onChange={this.onChange}
+            handleKeyCommand={this.handleKeyCommand.bind(this)}
+          />
+        </div>
+      </>
     );
   }
 }
