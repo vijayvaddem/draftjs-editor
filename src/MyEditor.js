@@ -1,5 +1,5 @@
 import React from "react";
-import { Editor, EditorState, RichUtils } from "draft-js";
+import { Editor, EditorState, RichUtils, convertToRaw } from "draft-js";
 
 class MyEditor extends React.Component {
   editorStyles = {
@@ -26,6 +26,12 @@ class MyEditor extends React.Component {
     return false;
   }
 
+  renderContentAsRawJSON() {
+    const contentState = this.state.editorState.getCurrentContent();
+    const raw = convertToRaw(contentState);
+    return JSON.stringify(raw, null, 2);
+  }
+
   render() {
     return (
       <>
@@ -44,6 +50,9 @@ class MyEditor extends React.Component {
             onChange={this.onChange}
             handleKeyCommand={this.handleKeyCommand.bind(this)}
           />
+        </div>
+        <div>
+          <pre>{this.renderContentAsRawJSON()}</pre>
         </div>
       </>
     );
